@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">ProfNotes</string>
+    <string name="padding_and_background">Padding and background</string>
+    <string name="color_green">Color green</string>
+    <string name="color_red">Color red</string>
+    <string name="bold_text">Bold text</string>
 </resources>
