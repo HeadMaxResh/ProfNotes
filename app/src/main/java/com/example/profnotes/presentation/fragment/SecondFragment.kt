@@ -1,4 +1,4 @@
-package com.example.profnotes.presentation
+package com.example.profnotes.presentation.fragment
 
 import android.os.Bundle
 import android.view.LayoutInflater

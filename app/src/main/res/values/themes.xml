@@ -15,4 +15,13 @@
         <!-- Customize your theme here. -->
         <item name="android:navigationBarColor">@color/light_grey</item>
     </style>
+
+    <style name="Theme.ProfNotes.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="Theme.ProfNotes.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="Theme.ProfNotes.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 </resources>

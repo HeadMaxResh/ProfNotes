@@ -1,4 +1,4 @@
-package com.example.profnotes.presentation
+package com.example.profnotes.presentation.fragment
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,17 +9,25 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.CompositePageTransformer
 import androidx.viewpager2.widget.MarginPageTransformer
 import androidx.viewpager2.widget.ViewPager2
-import androidx.viewpager2.widget.ViewPager2.OnPageChangeCallback
 import com.example.profnotes.databinding.FragmentHomeBinding
+import com.example.profnotes.domain.model.entity.Course
+import com.example.profnotes.presentation.viewmodel.HomeViewModel
 import com.example.profnotes.presentation.viewpager.ViewPagerAdapter
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 import me.relex.circleindicator.CircleIndicator3
 
-
 class HomeFragment : Fragment() {
+
+    private val viewModel by viewModels<HomeViewModel>()
 
     private lateinit var viewPager2: ViewPager2
     private lateinit var transformer: CompositePageTransformer
@@ -61,15 +69,28 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        /*button.setOnClickListener {
-            findNavController().navigate(
-                FirstFragmentDirections.actionFirstFragmentToSecondFragment(
-                    etTextForNavigation.text.toString()
-                )
-            )
-        }*/
-        postToViewPager()
+
         setViewPagerSettings()
+
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                loading()
+                viewModel.coursesItemFlow.collectLatest {
+                    postToViewPager(it)
+                    endLoading()
+                }
+            }
+        }
+    }
+
+    private fun loading() {
+        binding.uiScreen.visibility = View.GONE
+        binding.circularProgressIndicator.visibility = View.VISIBLE
+    }
+
+    private fun endLoading() {
+        binding.uiScreen.visibility = View.VISIBLE
+        binding.circularProgressIndicator.visibility = View.GONE
     }
 
     private fun addToViewPager(title: String, number: String) {
@@ -81,9 +102,9 @@ class HomeFragment : Fragment() {
         tagName.add(names)
     }
 
-    private fun postToViewPager() {
-        for (i in 1..9) {
-            addToViewPager("Title $i", "$i")
+    private fun postToViewPager(items: List<Course>) {
+        for (i in 1..items.size) {
+            addToViewPager(items[i].title, "$i")
             addToTagRecycler(
                 mutableListOf(
                     "Title $i",
@@ -114,7 +135,7 @@ class HomeFragment : Fragment() {
 
         indicator.setViewPager(viewPager2)
 
-        viewPager2.registerOnPageChangeCallback(object : OnPageChangeCallback() {
+        viewPager2.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
             override fun onPageSelected(position: Int) {
                 super.onPageSelected(position)
                 val scrollTo = indicator.getChildAt(position).left
@@ -122,6 +143,4 @@ class HomeFragment : Fragment() {
             }
         })
     }
-
-
 }
