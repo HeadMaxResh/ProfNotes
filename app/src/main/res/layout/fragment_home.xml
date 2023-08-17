@@ -7,7 +7,7 @@
     android:id="@+id/root_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".presentation.HomeFragment">
+    tools:context=".presentation.fragment.HomeFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/ui_screen"
@@ -75,7 +75,7 @@
                     android:id="@+id/ll_search"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/ic_search_background"
+                    android:background="@drawable/ic_et_background"
                     android:orientation="horizontal"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"

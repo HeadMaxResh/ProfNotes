@@ -16,4 +16,13 @@
     <string name="passed">Пройдено</string>
     <string name="left">Осталось</string>
     <string name="count_lesson_left">Неизвестно</string>
+    <string name="title_activity_authentication">AuthenticationActivity</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="enter_fragment_label">First Fragment</string>
+    <string name="registration_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+
+    <string name="hello_first_fragment">Hello first fragment</string>
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
 </resources>
