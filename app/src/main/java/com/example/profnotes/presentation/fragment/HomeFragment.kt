@@ -1,26 +1,30 @@
 package com.example.profnotes.presentation.fragment
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.widget.HorizontalScrollView
 import android.widget.ImageView
 import android.widget.LinearLayout
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.Navigation
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.ui.setupWithNavController
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.CompositePageTransformer
 import androidx.viewpager2.widget.MarginPageTransformer
 import androidx.viewpager2.widget.ViewPager2
+import com.example.profnotes.R
 import com.example.profnotes.databinding.FragmentHomeBinding
-import com.example.profnotes.domain.model.entity.Course
+import com.example.profnotes.domain.model.Course
 import com.example.profnotes.presentation.viewmodel.HomeViewModel
-import com.example.profnotes.presentation.viewpager.ViewPagerAdapter
+import com.example.profnotes.presentation.adapter.ViewPagerAdapter
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import me.relex.circleindicator.CircleIndicator3
@@ -39,6 +43,11 @@ class HomeFragment : Fragment() {
     private lateinit var searchButton: ImageView
     private lateinit var searchLinearLayout: LinearLayout
     private lateinit var lessonConstraintLayout: ConstraintLayout
+
+    lateinit var homeFragment: HomeFragment
+    private lateinit var addNoteFragment: AddNoteFragment
+    private lateinit var bookmarksFragment: BookmarksFragment
+    private lateinit var profileFragment: ProfileFragment
 
     private var titleCard = mutableListOf<String>()
     private var numberCard = mutableListOf<String>()
@@ -64,6 +73,22 @@ class HomeFragment : Fragment() {
         searchLinearLayout = binding.llSearch
         lessonConstraintLayout = binding.clLesson
 
+        binding.bottomNavigationView.setupWithNavController(findNavController())
+
+        val bnvNavigation = binding.bottomNavigationView
+
+        homeFragment = HomeFragment()
+        addNoteFragment = AddNoteFragment()
+        bookmarksFragment = BookmarksFragment()
+        profileFragment = ProfileFragment()
+
+        bnvNavigation.setOnItemSelectedListener { item ->
+            when (item.itemId) {
+
+            }
+            true
+        }
+
         return binding.root
     }
 
@@ -81,7 +106,25 @@ class HomeFragment : Fragment() {
                 }
             }
         }
+        binding.bottomNavigationView.setOnItemSelectedListener { item ->
+            val selectedFragment = when (item.itemId) {
+                //R.id.bottom_home -> HomeFragment()
+                R.id.bottom_save -> BookmarksFragment()
+                R.id.bottom_add -> AddNoteFragment()
+                R.id.bottom_message -> MessageFragment()
+                R.id.bottom_profile -> ProfileFragment()
+                else -> HomeFragment()
+            }
+            requireActivity().supportFragmentManager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE)
+            requireActivity().supportFragmentManager.beginTransaction().replace(R.id.homeFragment, selectedFragment).commit()
+            true
+        }
     }
+
+
+
+
+
 
     private fun loading() {
         binding.uiScreen.visibility = View.GONE
@@ -143,4 +186,10 @@ class HomeFragment : Fragment() {
             }
         })
     }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.bottom_menu, menu)
+        super.onCreateOptionsMenu(menu, inflater)
+    }
+
 }

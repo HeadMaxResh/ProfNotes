@@ -1,13 +1,12 @@
 package com.example.profnotes.data.api
 
-import com.example.profnotes.domain.model.entity.Course
-import com.example.profnotes.domain.model.request.EnterRequest
-import com.example.profnotes.domain.model.request.RegistrationRequest
-import com.example.profnotes.domain.model.responce.AuthenticationResponse
-import com.example.profnotes.domain.model.responce.CourseResponse
-import kotlinx.coroutines.Deferred
+import com.example.profnotes.domain.model.CommunityNote
+import com.example.profnotes.domain.model.Course
+import com.example.profnotes.domain.request.EnterRequest
+import com.example.profnotes.domain.request.RegistrationRequest
+import com.example.profnotes.domain.responce.AuthenticationResponse
+import com.example.profnotes.domain.responce.CourseResponse
 import retrofit2.Call
-import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
@@ -20,6 +19,12 @@ interface ApiService {
 
     @GET("courses/{id}")
     suspend fun getCourseById(@Path("id") id: Int): Course
+
+    @GET("community_notes")
+    suspend fun getCommunityNotes(): List<CommunityNote>
+
+    @GET("community_notes/{id}")
+    suspend fun getCommunityNoteById(@Path("id") id: Int): CommunityNote
 
     @POST("auth")
     fun auth(@Body request: EnterRequest): Call<AuthenticationResponse>

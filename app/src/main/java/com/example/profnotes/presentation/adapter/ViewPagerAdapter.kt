@@ -1,4 +1,4 @@
-package com.example.profnotes.presentation.viewpager
+package com.example.profnotes.presentation.adapter
 
 import android.view.LayoutInflater
 import android.view.View

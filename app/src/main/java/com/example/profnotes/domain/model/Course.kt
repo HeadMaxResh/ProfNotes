@@ -1,4 +1,4 @@
-package com.example.profnotes.domain.model.entity
+package com.example.profnotes.domain.model
 
 data class Course(
     val id: Int,

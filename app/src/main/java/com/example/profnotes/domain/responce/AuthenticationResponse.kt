@@ -1,4 +1,4 @@
-package com.example.profnotes.domain.model.responce
+package com.example.profnotes.domain.responce
 
 import com.squareup.moshi.JsonClass
 

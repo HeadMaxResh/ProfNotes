@@ -7,9 +7,9 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.profnotes.data.api.Api
 import com.example.profnotes.data.api.Token
-import com.example.profnotes.domain.model.request.EnterRequest
-import com.example.profnotes.domain.model.request.RegistrationRequest
-import com.example.profnotes.domain.model.responce.AuthenticationResponse
+import com.example.profnotes.domain.request.EnterRequest
+import com.example.profnotes.domain.request.RegistrationRequest
+import com.example.profnotes.domain.responce.AuthenticationResponse
 import com.squareup.moshi.JsonClass
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
