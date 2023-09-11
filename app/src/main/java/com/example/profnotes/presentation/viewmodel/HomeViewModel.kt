@@ -3,8 +3,7 @@ package com.example.profnotes.presentation.viewmodel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.profnotes.data.api.Api
-import com.example.profnotes.domain.model.entity.Course
-import com.example.profnotes.domain.model.responce.CourseResponse
+import com.example.profnotes.domain.model.Course
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
 

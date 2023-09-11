@@ -8,7 +8,11 @@
         android:id="@+id/homeFragment"
         android:name="com.example.profnotes.presentation.fragment.HomeFragment"
         android:label="fragment_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_homeFragment_to_newNoteFragment"
+            app:destination="@id/newNoteFragment" />
+    </fragment>
     <fragment
         android:id="@+id/enterFragment"
         android:name="com.example.profnotes.presentation.fragment.EnterFragment"
@@ -35,5 +39,23 @@
             app:destination="@id/enterFragment"
             app:popUpTo="@id/registrationFragment"
             app:popUpToInclusive="true"/>
+    </fragment>
+    <fragment
+        android:id="@+id/newNoteFragment"
+        android:name="com.example.profnotes.presentation.fragment.NewNoteFragment"
+        android:label="fragment_new_note"
+        tools:layout="@layout/fragment_new_note" >
+        <action
+            android:id="@+id/action_newNoteFragment_to_addNoteSheetFragment"
+            app:destination="@id/addNoteSheetFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addNoteSheetFragment"
+        android:name="com.example.profnotes.presentation.fragment.AddNoteSheetFragment"
+        android:label="fragment_add_note_sheet"
+        tools:layout="@layout/fragment_add_note_sheet" >
+        <action
+            android:id="@+id/action_addNoteSheetFragment_to_newNoteFragment"
+            app:destination="@id/newNoteFragment" />
     </fragment>
 </navigation>

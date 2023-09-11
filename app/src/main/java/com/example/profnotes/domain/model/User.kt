@@ -1,4 +1,4 @@
-package com.example.profnotes.domain.model.entity
+package com.example.profnotes.domain.model
 
 class User(
     val name: String,

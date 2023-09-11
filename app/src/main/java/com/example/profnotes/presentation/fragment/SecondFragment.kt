@@ -9,7 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.profnotes.databinding.FragmentSecondBinding
-import com.example.profnotes.presentation.viewpager.TagAdapter
+import com.example.profnotes.presentation.adapter.TagAdapter
 
 class SecondFragment : Fragment() {
 
